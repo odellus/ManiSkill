@@ -2,10 +2,70 @@
 requires = ["setuptools>=62.3.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.pytest.ini_options]
-markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-    "serial",
-    "gpu_sim: marks tests as using the GPU simulation (deselect with '-m \"not gpu_sim\"')",
-    "serial",
+[tool.setuptools]
+packages.find.include = ["mani_skill*"]
+package-data.mani_skill = ["assets/**", "envs/**/*", "utils/**/*"]
+package-data."warp_maniskill.warp" = ["native/*", "native/nanovdb/*"]
+
+[project]
+name = "mani_skill"
+version = "3.0.0b21"
+description = "ManiSkill3: A Unified Benchmark for Generalizable Manipulation Skills"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+dependencies = [
+  "numpy>=1.22,<2.0.0",
+  "scipy",
+  "dacite",
+  "gymnasium==0.29.1",
+  "h5py",
+  "pyyaml",
+  "tqdm",
+  "gitpython",
+  "tabulate",
+  "transforms3d",
+  "trimesh",
+  "imageio",
+  "imageio-ffmpeg",
+  "mplib>=0.1.1 ; platform_system == 'Linux'",
+  "fast-kinematics>=0.2.2 ; platform_system == 'Linux'",
+  "ipython",
+  "pytorch-kinematics==0.7.5",
+  "pynvml",
+  "tyro>=0.8.5",
+  "huggingface-hub",
+  "sapien>=3.0.0.b1 ; platform_system == 'Linux' or platform_system == 'Windows'",
+]
+
+[project.urls]
+homepage = "https://github.com/haosulab/ManiSkill"
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "black",
+  "isort",
+  "pre-commit",
+  "build",
+  "twine",
+  "stable-baselines3",
+  "pynvml",
+  "pytest-xdist[psutil]",
+  "pytest-forked",
+]
+
+docs = [
+  "sphinx==6.2.1",
+  "sphinx-autobuild",
+  "pydata-sphinx-theme",
+  "sphinx-autodoc-typehints",
+  "sphinx-copybutton",
+  "myst-parser",
+  "sphinx-subfigure",
+  "sphinxcontrib-video",
+  "sphinx-togglebutton",
+  "sphinx-design",
+  "sphinxcontrib-spelling",
 ]
